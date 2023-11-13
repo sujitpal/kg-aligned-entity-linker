@@ -1,0 +1,5 @@
+matplotlib
+polars
+qdrant-client
+sentence-transformers
+transformers
