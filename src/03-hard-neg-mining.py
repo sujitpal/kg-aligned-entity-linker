@@ -8,8 +8,8 @@ from transformers import AutoTokenizer, AutoModel
 
 
 DATA_DIR = "../data"
-INPUT_FILE = os.path.join(DATA_DIR, "positive_pairs.tsv")
-OUTPUT_FILE = os.path.join(DATA_DIR, "syn-triples.tsv")
+INPUT_FILE = os.path.join(DATA_DIR, "positive_pairs_train.tsv")
+OUTPUT_FILE = os.path.join(DATA_DIR, "syn_triples.tsv")
 
 MODEL_NAME = "bert-base-uncased"
 
@@ -27,7 +27,7 @@ tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 model = AutoModel.from_pretrained(MODEL_NAME)
 
 client = QdrantClient("localhost", port=6333)
-coll_info = client.get_collection(collection_name=MODEL_NAME)
+coll_info = client.get_collection(MODEL_NAME)
 assert coll_info.status == CollectionStatus.GREEN
 
 num_pairs = 0

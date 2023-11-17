@@ -8,7 +8,7 @@ from transformers import AutoTokenizer, AutoModel
 
 
 DATA_DIR = "../data"
-INPUT_FILE = os.path.join(DATA_DIR, "positive_pairs.tsv")
+INPUT_FILE = os.path.join(DATA_DIR, "positive_pairs_train.tsv")
 BATCH_SIZE = 32
 
 MODEL_NAME = "bert-base-uncased"
