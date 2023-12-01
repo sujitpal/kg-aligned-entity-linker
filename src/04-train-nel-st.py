@@ -10,7 +10,7 @@ from torch.utils.data import DataLoader
 
 DATA_DIR = "../data"
 POSITIVE_PAIRS_FILE = os.path.join(DATA_DIR, "positive_pairs_train.tsv")
-SYN_TRIPLES_FILE = os.path.join(DATA_DIR, "syn_triples.tsv")
+SYN_TRIPLES_FILE_TEMPLATE = os.path.join(DATA_DIR, "syn_triples-{:d}.tsv")
 
 
 if __name__ == "__main__":
@@ -18,6 +18,8 @@ if __name__ == "__main__":
     parser.add_argument("--input", type=str, help="model to fine-tune")
     parser.add_argument("--loss", choices=["mnr", "trp"], help="loss function")
     parser.add_argument("--output", type=str, help="model name or path")
+    parser.add_argument("--triple-nn", type=int, default=1,
+                        help="number of nearest neighbors for triplet loss")
     args = parser.parse_args()
 
     # model definition
@@ -36,7 +38,7 @@ if __name__ == "__main__":
     # loss function and data preparation
     train_examples = []
     if args.loss == "mnr":
-        with open(os.path.join(DATA_DIR, "positive_pairs_train.tsv")) as f:
+        with open(POSITIVE_PAIRS_FILE, "r") as f:
             for line in f:
                 if line.startswith("CUI"):
                     continue
@@ -45,7 +47,8 @@ if __name__ == "__main__":
                                                    label=1.0))
         loss_fn = losses.MultipleNegativesRankingLoss(model)
     elif args.loss == "trp":
-        with open(os.path.join(DATA_DIR, "syn_triples.tsv")) as f:
+        syn_triples_file = SYN_TRIPLES_FILE_TEMPLATE.format(args.triple_nn)
+        with open(syn_triples_file, "r") as f:
             for line in f:
                 if line.startswith("CUI"):
                     continue

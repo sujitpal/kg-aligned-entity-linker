@@ -14,6 +14,7 @@ FIGURES_DIR = "../figs"
 VIZ_PAIRS_FILE = os.path.join(DATA_DIR, "positive_pairs_viz.tsv")
 
 if __name__ == "__main__":
+    
     parser = argparse.ArgumentParser()
     parser.add_argument("--model", type=str, help="model name or path")
     args = parser.parse_args()
