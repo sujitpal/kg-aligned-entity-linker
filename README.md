@@ -90,7 +90,7 @@ The `kgnel-bert-trp-3` and `kgnel-bert-trp-5` models use versions of Hard Negati
  
 ## Discussion
 
-Our results concur with the results from the SapBERT paper and finds the MNR loss to be more effective at encoding the synonym similarity. In addition, we find that a pre-trained transformer model that is previously fine-tuned on medical literature (`BiomedBERT`) is more effective than one that is not, which is also consistent with our priors.
+Our results concur with the results from the SapBERT paper and finds the MNR loss to be more effective at encoding the synonym similarity. In addition, we find that a pre-trained transformer model that is previously fine-tuned on medical literature (`BiomedBERT`) is more effective than one that is not, which is also consistent with our understanding.
 
 Somewhat to our surprise, we find that the performance of models fine-tuned with TripletLoss falls as we increase the number of neighbors. The intuition is that TripletLoss offers more control over distinguishing positive pairs vs negative pairs than MNR. However, it is likely that the Hard Negative Mining technique we are using is too simplistic to compete with MNR.
 
