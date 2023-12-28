@@ -130,3 +130,7 @@ This section describes the code and how you can run it to reproduce the results 
   python 06-viz-nel-st.py --model model_name_or_path
   ```
 
+## Demo
+
+Please see [Demo README](demo/README.md) for details
+

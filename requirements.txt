@@ -3,3 +3,7 @@ polars
 qdrant-client
 sentence-transformers
 transformers
+spacy
+scispacy
+streamlit
+spacy_streamlit
