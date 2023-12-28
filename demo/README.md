@@ -21,13 +21,31 @@ $ docker pull qdrant/qdrant    # one time
 $ docker run -p 6333:6333 -p 6334:6334 \
     -v $(pwd)/qdrant_storage:/qdrant/storage:z \
     qdrant/qdrant
-$ python 02-gen-vectors-to-index-qdrant.py
 ```
 
+You will also need to install the `qdrant_client` to enable your code to communicate with the QDrant vector store.
+
+```
+$ pip install qdrant_client
+```
+
+Finally, run the code to read the JSON-L file, encode each group of entity synonyms and compute the centroid, and store that against the CUI into QDrant.
+
+```
+$ python 02-gen-vectors-to-index-qdrant.py
+```
 This will set up a `qdrant_storage` directory under the location where it was invoked (in our demo we used the `data` directory) and populate it with centroids of the synonym embeddings for each `DISEASE` and `DRUG` entity in UMLS.
 
 We then run the [Streamlit](https://streamlit.io/) code which allows us to enter a block of text and have it be annotated by the NER model, each of which is then linked to the closest `DRUG` or `DISEASE` entity by the NEL model. Because we are only considering a subset of entity types, we use a threshold (0.7) to exclude any matches where the cosine similarity between the phrase embedding and the best entity centroid.
 
+You will need some additional packages to run the demo. They have been updated into the project `requirements.txt` file, so they may already be installed.
+
+```
+$ pip install -U spacy scispacy
+$ pip install install -U https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.5.3/en_core_sci_sm-0.5.3.tar.gz
+$ pip install -U streamlit
+```
+ 
 ```
 $ streamlit run 03-run-demo.py
 ```
