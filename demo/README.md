@@ -1,6 +1,6 @@
 ## Named Entity Recognition and Linking (NERL) Demo
 
-The demo shows a pipeline of an off-the-shelf Named Entity Recognition trained to recognize medical phrases (`en_core_sci_sm` model from the [SciSpacy](https://allenai.github.io/scispacy/) project) followed by our best Knowledge Graph Aligned model (`kgnel-bmbert-mnr`) to link the Named Entities to the appropriate entity.
+The demo shows a pipeline of an off-the-shelf Named Entity Recognition trained to recognize medical phrases (`en_core_sci_sm` model from the [SciSpacy](https://allenai.github.io/scispacy/) project) followed by our best Knowledge Graph Aligned model (`kgnel-bmbert-mnr`) to link the Named Entities to the appropriate entity. It simulates a Concept Discovery pipeline using Literature Search, through which newly published literature can be processed in an attempt to discover potential new synonym candidates for entities that exist in our Knowledge Graph. These synonyms can then be exported to a (faster) dictionary based NER to help improve its recall during the annotation process.
 
 The Named Entity Recognition (NER) model simply takes in text and outputs spans of text it recognizes as medical phrases. It does not attempt to link them to specific Knowledge Graph entities. Trying to do so for more than a few classes is generally not practical.
 
